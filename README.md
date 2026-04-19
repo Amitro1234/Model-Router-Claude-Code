@@ -18,6 +18,10 @@ The router classifies every task by complexity and selects the cheapest model th
 
 Simple task? Haiku. Writing a function or debugging across files? Sonnet. Designing a new system from scratch or security audit? Opus. The router decides automatically — developers just work.
 
+### Example Output
+
+![Router classifying a file-read task as Tier 1 / Haiku](assets/demo-routing-tier1.png)
+
 ## Installation
 
 Copy the `.claude/skills/model-router-skill/` folder into your repo, then add this to your `CLAUDE.md`:
