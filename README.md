@@ -24,7 +24,13 @@ Simple task? Haiku. Writing a function or debugging across files? Sonnet. Design
 
 ## Installation
 
-Copy the `.claude/skills/model-router-skill/` folder into your repo, then add this to your `CLAUDE.md`:
+### Option A — Per-project (shared with teammates via repo)
+
+Best when you want **every developer on a repo** to get the routing automatically.
+
+**1.** Copy the `.claude/skills/model-router-skill/` folder into your project root (preserving the path).
+
+**2.** Add a `CLAUDE.md` file at the project root with the routing instructions:
 
 ```markdown
 ## Model Selection
@@ -46,7 +52,55 @@ When uncertain: **Tier 2, `claude-sonnet-4-6`**
 Full examples and edge cases: `.claude/skills/model-router-skill/SKILL.md`
 ```
 
-Every developer working on the repo gets the routing automatically.
+**3.** Commit both `.claude/` and `CLAUDE.md` to version control. Done — every teammate who clones the repo gets the routing.
+
+### Option B — Global (works in every project on your machine)
+
+Best when you want the routing **everywhere**, even in projects that don't have it set up.
+
+**1.** Copy the skill to your global Claude Code skills directory:
+
+```bash
+# macOS / Linux
+mkdir -p ~/.claude/skills/model-router-skill
+cp .claude/skills/model-router-skill/* ~/.claude/skills/model-router-skill/
+
+# Windows (PowerShell)
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\model-router-skill"
+Copy-Item .claude\skills\model-router-skill\* "$env:USERPROFILE\.claude\skills\model-router-skill\"
+```
+
+**2.** Add the routing instructions to your global `~/.claude/CLAUDE.md` (create it if it doesn't exist):
+
+```markdown
+## Model Selection
+
+Before starting ANY task, classify it and announce the tier + model. This is mandatory — never skip it.
+
+### Routing Rules
+
+| Tier | Model | When |
+|------|-------|------|
+| **1 — Light** | `claude-haiku-4-5-20251001` | Read files, run tools (ruff, black, pytest, mypy, pre-commit), grep, git status/log/diff, parse config, count lines |
+| **2 — Standard** | `claude-sonnet-4-6` | Write code, fix bugs, refactor, write tests, explain code, code review, debug (any scope), integration work |
+| **3 — Heavy** | `claude-opus-4-7` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
+
+### Default
+When uncertain: **Tier 2, `claude-sonnet-4-6`**
+
+### Extended Reference
+Full examples and edge cases: `~/.claude/skills/model-router-skill/SKILL.md`
+```
+
+That's it. Open Claude Code on **any** project and the routing is active.
+
+### Option C — Both (recommended for teams)
+
+Use **global** for yourself so you always have it, and **per-project** for repos you share with teammates:
+
+- Global install ensures the router works in every directory you open
+- Per-project install ensures teammates get it when they clone the repo
+- If both exist, per-project takes precedence (so teams can customize per repo)
 
 ## Overriding Per-Session
 
@@ -68,7 +122,10 @@ Need a specific model for a session? Override anytime:
 
 ## Updating the Routing Rules
 
-Edit `.claude/skills/model-router-skill/SKILL.md` — specifically the Routing Table and Decision Logic sections. Changes are picked up immediately, no reinstall needed. Commit to share updates with the team.
+Edit `SKILL.md` — specifically the Routing Table and Decision Logic sections. Changes are picked up immediately within active sessions, no reinstall needed.
+
+- **Per-project:** commit the changes so teammates get the update
+- **Global:** the change applies to your next session automatically
 
 ---
 
