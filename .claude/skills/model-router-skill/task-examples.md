@@ -77,7 +77,7 @@
 
 ---
 
-## Tier 3 — claude-opus-4-7 (Heavy / Deep reasoning)
+## Tier 3 — claude-opus-5 (Heavy / Deep reasoning)
 
 ### Architecture
 - "Design the data model for a multi-tenant SaaS platform from scratch"

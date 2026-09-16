@@ -1,14 +1,13 @@
 ---
 name: model-router
 description: >
-  Dynamic model router for Claude Code — automatically selects the most cost-effective
-  Claude model for each task instead of always defaulting to the most expensive model.
-  ALWAYS use this skill at the start of any Claude Code session, or whenever the user
-  asks Claude to perform a task of any kind (read files, run tests, lint, write code,
-  refactor, review architecture, debug, etc.) so the right model is chosen before work
-  begins. Triggers on: any coding task, file operations, test runs, linting, code review,
-  architecture planning, debugging, or any request where model selection matters for the
-  cost/quality tradeoff. When in doubt — use this skill.
+  Routes Claude Code tasks to the most cost-effective model based on complexity.
+  Use before writing code, fixing bugs, running tools, reviewing architecture,
+  or any task where model selection affects cost or quality.
+when_to_use: >
+  At the start of any Claude Code session or task. Invoke before starting work
+  on file reads, test runs, linting, bug fixes, refactors, code review, debugging,
+  architecture decisions, or security audits.
 ---
 
 # Model Router — Claude Code
@@ -28,7 +27,7 @@ handle it well.
 |------|-------|-------------|----------|
 | **1 — Light** | `claude-haiku-4-5-20251001` | Very low | File reads, grep/search, lint/format runs, test execution, bash commands, config parsing |
 | **2 — Standard** | `claude-sonnet-4-6` | Medium | Writing new code, fixing bugs, refactoring, writing tests, explaining code, code review, complex debugging, large-scale refactors, integration work |
-| **3 — Heavy** | `claude-opus-4-7` | High | Architecture decisions, system design, security audits, threat modeling, deep investigation with no clear starting point, greenfield design |
+| **3 — Heavy** | `claude-opus-5` | High | Architecture decisions, system design, security audits, threat modeling, deep investigation with no clear starting point, greenfield design |
 
 > **Default when uncertain:** Use Tier 2 (`claude-sonnet-4-6`) — it covers the vast majority of coding tasks well.
 
@@ -96,12 +95,12 @@ handle it well.
 # Via CLI flag (per-session):
 claude --model claude-haiku-4-5-20251001
 claude --model claude-sonnet-4-6
-claude --model claude-opus-4-7
+claude --model claude-opus-5
 
 # Within a session via slash command:
 /model claude-haiku-4-5-20251001
 /model claude-sonnet-4-6
-/model claude-opus-4-7
+/model claude-opus-5
 ```
 
 **In `CLAUDE.md` (project-level default):**
@@ -118,7 +117,7 @@ Fallback default if skill is not consulted: claude-sonnet-4-6
 ```
 TIER 1 — claude-haiku-4-5-20251001   → read, run, find, lint, format, check, diff
 TIER 2 — claude-sonnet-4-6           → write, fix, test, explain, refactor, debug, review
-TIER 3 — claude-opus-4-7             → design, architect, audit, investigate, greenfield
+TIER 3 — claude-opus-5               → design, architect, audit, investigate, greenfield
 ```
 
 ---
@@ -130,7 +129,7 @@ When this skill is active, Claude must:
 1. **State the selected model and tier before starting work:**
    > "Task: run lint + show failures → Tier 1, using `claude-haiku-4-5-20251001`."
    > "Task: refactor auth module across 4 files → Tier 2, using `claude-sonnet-4-6`."
-   > "Task: design event-driven architecture → Tier 3, using `claude-opus-4-7`."
+   > "Task: design event-driven architecture → Tier 3, using `claude-opus-5`."
 
 2. **Re-evaluate mid-task** if scope expands unexpectedly. If a "quick fix" reveals a deeper
    architectural issue, stop, announce the escalation, and confirm with the user.
@@ -160,9 +159,9 @@ When this skill is active, Claude must:
 | "Refactor the auth module to use DI" | 2 | `claude-sonnet-4-6` | Multi-file, higher stakes |
 | "Why does the API return 500 intermittently?" | 2 | `claude-sonnet-4-6` | Complex debug, unclear cause |
 | "Review this PR for correctness and architecture" | 2 | `claude-sonnet-4-6` | Nuanced multi-concern review |
-| "Should we use event sourcing for orders?" | 3 | `claude-opus-4-7` | Architectural decision |
-| "Security audit of our API layer" | 3 | `claude-opus-4-7` | Threat modeling |
-| "Design a greenfield service from scratch" | 3 | `claude-opus-4-7` | Greenfield design |
+| "Should we use event sourcing for orders?" | 3 | `claude-opus-5` | Architectural decision |
+| "Security audit of our API layer" | 3 | `claude-opus-5` | Threat modeling |
+| "Design a greenfield service from scratch" | 3 | `claude-opus-5` | Greenfield design |
 
 ---
 
@@ -178,4 +177,4 @@ When this skill is active, Claude must:
 ## See Also
 
 - `task-examples.md` — Extended example bank per tier
-- Claude Code docs: https://docs.anthropic.com/en/docs/claude-code
+- Claude Code docs: https://code.claude.com/docs/en/

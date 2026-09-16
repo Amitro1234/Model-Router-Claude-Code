@@ -8,7 +8,7 @@ Before starting ANY task, classify it and announce the tier + model. This is man
 |------|-------|------|
 | **1 — Light** | `claude-haiku-4-5-20251001` | Read files, run tools (ruff, black, pytest, mypy, pre-commit), grep, git status/log/diff, parse config, count lines |
 | **2 — Standard** | `claude-sonnet-4-6` | Write code, fix bugs, refactor, write tests, explain code, code review, debug (any scope), integration work |
-| **3 — Heavy** | `claude-opus-4-7` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
+| **3 — Heavy** | `claude-opus-5` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
 
 ### Required Behavior
 
@@ -18,7 +18,7 @@ Before starting ANY task, classify it and announce the tier + model. This is man
 2. Then switch model if needed:
    `/model claude-haiku-4-5-20251001`   (Tier 1)
    `/model claude-sonnet-4-6`           (Tier 2)
-   `/model claude-opus-4-7`             (Tier 3)
+   `/model claude-opus-5`               (Tier 3)
 
 3. **Upgrade one tier** if: task touches auth/payments/migrations, user says "don't rush" or "use the best model", previous attempt at lower tier failed.
 
