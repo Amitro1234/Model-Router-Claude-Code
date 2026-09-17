@@ -14,7 +14,7 @@ The router classifies every task by complexity and selects the cheapest model th
 |------|-------|----------------|
 | 1 — Light | `claude-haiku-4-5-20251001` | Run tests, lint, grep, read files, bash commands |
 | 2 — Standard | `claude-sonnet-4-6` | Write code, fix bugs, write tests, debug, code review, refactor |
-| 3 — Heavy | `claude-opus-4-7` | Architecture, security audit, greenfield design, strategic decisions |
+| 3 — Heavy | `claude-opus-5` | Architecture, security audit, greenfield design, strategic decisions |
 
 Simple task? Haiku. Writing a function or debugging across files? Sonnet. Designing a new system from scratch or security audit? Opus. The router decides automatically — developers just work.
 
@@ -43,7 +43,7 @@ Before starting ANY task, classify it and announce the tier + model. This is man
 |------|-------|------|
 | **1 — Light** | `claude-haiku-4-5-20251001` | Read files, run tools (ruff, black, pytest, mypy, pre-commit), grep, git status/log/diff, parse config, count lines |
 | **2 — Standard** | `claude-sonnet-4-6` | Write code, fix bugs, refactor, write tests, explain code, code review, debug (any scope), integration work |
-| **3 — Heavy** | `claude-opus-4-7` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
+| **3 — Heavy** | `claude-opus-5` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
 
 ### Default
 When uncertain: **Tier 2, `claude-sonnet-4-6`**
@@ -83,7 +83,7 @@ Before starting ANY task, classify it and announce the tier + model. This is man
 |------|-------|------|
 | **1 — Light** | `claude-haiku-4-5-20251001` | Read files, run tools (ruff, black, pytest, mypy, pre-commit), grep, git status/log/diff, parse config, count lines |
 | **2 — Standard** | `claude-sonnet-4-6` | Write code, fix bugs, refactor, write tests, explain code, code review, debug (any scope), integration work |
-| **3 — Heavy** | `claude-opus-4-7` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
+| **3 — Heavy** | `claude-opus-5` | Architecture decisions, greenfield design, security audits, threat modeling, strategic decisions, "I don't know where to start" |
 
 ### Default
 When uncertain: **Tier 2, `claude-sonnet-4-6`**
@@ -109,7 +109,7 @@ Need a specific model for a session? Override anytime:
 ```bash
 /model claude-haiku-4-5-20251001   # Tier 1
 /model claude-sonnet-4-6           # Tier 2
-/model claude-opus-4-7             # Tier 3
+/model claude-opus-5               # Tier 3
 ```
 
 ## What's Included

@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[model-router] Classify task → Tier 1 (haiku), Tier 2 (sonnet), or Tier 3 (opus) before starting work.'"
+          }
+        ]
+      }
+    ]
+  }
+}
